@@ -1,5 +1,5 @@
-#Detect Powershell Script
-#Recommended Invocation: powershell "irm https://blackducksoftware.github.io/hub-detect/hub-detect.ps1?$(Get-Random) | iex; detect"
+# Detect Powershell Script
+# Recommended Invocation: powershell "irm https://blackducksoftware.github.io/hub-detect/hub-detect.ps1?$(Get-Random) | iex; detect"
 
 function Get-EnvironmentVariable($Key, $DefaultValue) { if (-not (Test-Path Env:$Key)) { return $DefaultValue; }else { return (Get-ChildItem Env:$Key).Value; } }
 
@@ -34,29 +34,36 @@ $EnvDetectSource = Get-EnvironmentVariable -Key "DETECT_SOURCE" -DefaultValue ""
 # *that* location will be used.
 # *NOTE* We currently do not support spaces in the
 # DETECT_JAR_PATH.
-# Otherwise, if the environment temp folder is set, it will be used.
-# Otherwise, a temporary folder will be created in your home directory
+# Otherwise, if the environment temp folder is set,
+# it will be used. Otherwise, a temporary folder will
+# be created in your home directory
 $EnvDetectFolder = Get-EnvironmentVariable -Key "DETECT_JAR_PATH" -DefaultValue "";
 $EnvTempFolder = Get-EnvironmentVariable -Key "TMP" -DefaultValue "";
 $EnvHomeTempFolder = "$HOME/tmp"
 
 
-# If you do not want to exit with the detect exit code,
-# set DETECT_EXIT_CODE_PASSTHRU to 1 and this script won't exit, but simply return it (pass it thru).
+# If you do not want to exit with the detect exit
+# code, set DETECT_EXIT_CODE_PASSTHRU to 1 and this
+# script won't exit, but simply return it (pass it thru).
 $EnvDetectExitCodePassthru = Get-EnvironmentVariable -Key "DETECT_EXIT_CODE_PASSTHRU" -DefaultValue "";
 
-# If you want to pass proxy information, use detect environment variables such as 'blackduck.proxy.host'
-# If you do pass the proxy information in this way, you do not need to supply it to detect as arguments. 
-# Note: This script will not pick up proxy information from the passed 'detect arguments'
-# Note: This script will not pick up proxy information passed to the bash script using 'DETECT_CURL_OPTS'
+# If you want to pass proxy information, use detect
+# environment variables such as 'blackduck.proxy.host'
+# If you do pass the proxy information in this way,
+# you do not need to supply it to detect as arguments.
+# Note: This script will not pick up proxy information
+# from the passed 'detect arguments'
+# Note: This script will not pick up proxy information
+# passed to the bash script using 'DETECT_CURL_OPTS'
 
-#TODO: Mirror the functionality of the shell script and allow Java opts.
+# TODO: Mirror the functionality of the shell script
+# and allow Java opts.
 
 # If you want to pass any java options to the
 # invocation, specify DETECT_JAVA_OPTS in your
 # environment. For example, to specify a 6 gigabyte
 # heap size, you would set DETECT_JAVA_OPTS=-Xmx6G.
-#$DetectJavaOpts = Get-EnvironmentVariable -Key "DETECT_JAVA_OPTS" -DefaultValue "";
+# $DetectJavaOpts = Get-EnvironmentVariable -Key "DETECT_JAVA_OPTS" -DefaultValue "";
 
 $Version = "//SCRIPT_VERSION//"
 
